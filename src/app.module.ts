@@ -5,6 +5,8 @@ import { ClientModule } from './client/client.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ChatModule } from './chat/chat.module';
+import { GroupModule } from './group/group.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -29,6 +31,8 @@ import { ChatModule } from './chat/chat.module';
     ClientModule,
     AuthModule,
     ChatModule,
+    GroupModule,
+    UploadModule,
   ],
   controllers: [],
   providers: [],
