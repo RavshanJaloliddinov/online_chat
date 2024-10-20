@@ -25,6 +25,7 @@ async function bootstrap() {
     .addTag('microservice')
     .build();
 
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api", app, document);
 
@@ -34,6 +35,7 @@ async function bootstrap() {
   await app.listen(port, () => {
     console.log(`Listening on http://${host}:${port}`);
   });
+
 
 }
 
