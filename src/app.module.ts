@@ -13,6 +13,8 @@ import { User } from './user/models';
 import { Group } from './group/entities/group.entity';
 import { CheckAuthGuard } from './guards/check-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { GroupOfUserModule } from './group_of_user/group_of_user.module';
+
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -41,6 +43,7 @@ import { APP_GUARD } from '@nestjs/core';
     GroupModule,
     UploadModule,
     MessageModule,
+    GroupOfUserModule,
   ],
   controllers: [],
   providers: [
