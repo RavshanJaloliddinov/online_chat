@@ -21,8 +21,10 @@ import { BASE_URL } from './config/base_url';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [dbConfig, appConfig,BASE_URL],
-      isGlobal: true, 
+
+      load: [dbConfig, appConfig],
+      isGlobal: true,
+
 
     }),
     SequelizeModule.forRootAsync({
@@ -38,6 +40,7 @@ import { BASE_URL } from './config/base_url';
         synchronize: true,
         // sync: {force: true},
         logging: console.log,
+        // sync: { force: true },
         autoLoadModels: true,
       }),
       inject: [ConfigService],

@@ -14,8 +14,6 @@ import { UserService } from 'src/user/user.service'
   },
 })
 export class ChatController implements OnGatewayConnection, OnGatewayDisconnect {
-
-
   constructor(private readonly userService: UserService) { }
 
   @WebSocketServer()
