@@ -11,6 +11,7 @@ import { MessageModule } from './message/message.module';
 import { Message } from './message/entities/message.entity';
 import { User } from './user/models';
 import { Group } from './group/entities/group.entity';
+import { GroupOfUserModule } from './group_of_user/group_of_user.module';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -22,7 +23,7 @@ import { Group } from './group/entities/group.entity';
       database: "chat",
       autoLoadModels: true, 
       synchronize: true,
-      sync: {force: true},
+      // sync: {force: true},
       models: [User, Message, Group]
     }),
     JwtModule.register({
@@ -39,6 +40,7 @@ import { Group } from './group/entities/group.entity';
     GroupModule,
     UploadModule,
     MessageModule,
+    GroupOfUserModule,
   ],
   controllers: [],
   providers: [],
