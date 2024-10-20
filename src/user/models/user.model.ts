@@ -19,6 +19,7 @@ export class User extends Model<User> {
     password: string
 
 
+
     @HasOne(()=>Message)
     user: User
 
