@@ -6,18 +6,25 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets'
 import { Server, Socket } from 'socket.io'
+import { UserService } from 'src/user/user.service'
 
 @WebSocketGateway({
   cors: {
-    origin: '*', 
+    origin: '*',
   },
 })
 export class ChatController implements OnGatewayConnection, OnGatewayDisconnect {
+
+
+  constructor(private readonly userService: UserService) { }
+
   @WebSocketServer()
   server: Server
 
   handleConnection(client: Socket) {
-    console.log(`Foydalanuvchi ulanmoqda: ${client.id}`)
+    console.log(`Foydalanuvchi ulanmoqda: ${client.id}`
+
+    )
   }
 
   handleDisconnect(client: Socket) {

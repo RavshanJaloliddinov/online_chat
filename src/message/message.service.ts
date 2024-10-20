@@ -13,6 +13,7 @@ export class MessageService {
 
   create(payload: CreateMessageDto) {
     return this.messageModel.create({
+      message_type: payload?.message_type,
       text: payload.text,
       chat_id: payload.chat_id,
       user_id: payload.user_id,
@@ -32,6 +33,7 @@ export class MessageService {
     return this.messageModel.update(
 
       {
+        message_type: payload?.message_type,
         text: payload?.text,
         user_id: payload?.user_id,
         chat_id: payload?.chat_id,

@@ -3,4 +3,5 @@ export declare interface UpdateUserRequest {
     image?: string,
     email?: string,
     password?: string,
+    status?: boolean
 }

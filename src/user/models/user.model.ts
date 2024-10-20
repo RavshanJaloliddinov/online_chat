@@ -1,6 +1,7 @@
+import { BOOLEAN } from "sequelize";
 import { DataType, Column, Table, Model } from "sequelize-typescript";
 
-@Table({tableName: 'User', timestamps: true})
+@Table({ tableName: 'User', timestamps: true })
 export class User extends Model<User> {
     @Column({ type: DataType.STRING, allowNull: false })
     full_name: string
@@ -13,4 +14,7 @@ export class User extends Model<User> {
 
     @Column({ type: DataType.STRING, allowNull: false })
     password: string
+
+    @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
+    status: boolean
 } 

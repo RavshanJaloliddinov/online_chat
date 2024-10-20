@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsOptional, IsNumber, IsString } from "class-validator"
+import { IsOptional, IsNumber, IsString, IsEnum } from "class-validator"
 
 export class UpdateMessageDto {
 
@@ -33,9 +33,16 @@ export class UpdateMessageDto {
     @ApiProperty({
         type: String,
         required: false
-
     })
     @IsString()
-    @IsOptional()
+    @IsOptional() 
     image?: string
+
+    @ApiProperty({
+        type: String,       
+        required: false,
+    })
+    @IsEnum(['message', 'notification'])
+    @IsOptional()
+    message_type?: string
 }

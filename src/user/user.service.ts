@@ -33,6 +33,7 @@ export class UserService {
         image: payload?.image,
         email: payload?.email,
         password: payload?.password,
+        status: payload?.status,
       },
       { where: { id } },)
   }
