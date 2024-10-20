@@ -21,7 +21,7 @@ import { appConfig } from './config/app.config';
   imports: [
     ConfigModule.forRoot({
       load: [dbConfig, appConfig],
-      isGlobal: true, 
+      isGlobal: true,
 
     }),
     SequelizeModule.forRootAsync({
@@ -36,6 +36,7 @@ import { appConfig } from './config/app.config';
         models: [User, Group, Message, GroupOfUser],
         synchronize: true,
         logging: console.log,
+        // sync: { force: true },
         autoLoadModels: true,
       }),
       inject: [ConfigService],
