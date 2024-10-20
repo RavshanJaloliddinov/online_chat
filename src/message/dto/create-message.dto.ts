@@ -1,6 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
-import { Binary } from "typeorm"
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 import { MessageType } from "../entities/message.entity"
 
 export class CreateMessageDto {

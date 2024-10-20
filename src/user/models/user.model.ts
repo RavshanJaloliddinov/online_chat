@@ -19,12 +19,16 @@ export class User extends Model<User> {
     password: string
 
 
+    @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
+    status: boolean
+
     @HasOne(()=>Message)
     user: User
 
     @HasMany(()=>GroupOfUser)
     group: GroupOfUser[]
     
+
 
 
 } 

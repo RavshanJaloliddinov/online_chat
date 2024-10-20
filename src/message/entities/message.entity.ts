@@ -47,7 +47,7 @@ export class Message extends Model<Message>{
 
 
     @Column({type: DataType.ENUM(MessageType.joined,MessageType.message), defaultValue: MessageType.message})
-    message_type: MessageType
+    message_type: string
 
    
 

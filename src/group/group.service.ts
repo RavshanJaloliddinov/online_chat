@@ -3,11 +3,10 @@ import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Group } from './entities/group.entity';
-import { UploadService } from 'src/upload/upload.service';
 import { Message } from 'src/message/entities/message.entity';
 import { User } from 'src/user/models';
 import { GroupOfUser } from 'src/group_of_user/entities/group_of_user.entity';
-import { model } from 'mongoose';
+
 
 @Injectable()
 export class GroupService {

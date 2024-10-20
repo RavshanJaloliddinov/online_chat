@@ -36,7 +36,6 @@ export class MessageService {
       chat_id: payload.chat_id,
       user_id: payload.user_id,
       image: payload?.image,
-      message_type: payload.message_type
     })
   }
 
