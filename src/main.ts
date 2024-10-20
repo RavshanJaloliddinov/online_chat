@@ -19,8 +19,8 @@ async function bootstrap() {
   SwaggerModule.setup("api", app, document)
 
 
-  await app.listen(3000), () => {
-    console.log(`Listening on ${3000}`)
+  await app.listen(4000), () => {
+    console.log(`Listening on ${4000}`)
   };
 }
 bootstrap();

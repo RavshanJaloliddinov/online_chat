@@ -9,14 +9,14 @@ import { ChatModule } from './chat/chat.module';
 @Module({
   imports: [SequelizeModule.forRoot({
       dialect: 'postgres',
-      host: process.env.DB_HOST,
+      host: "localhost",
       port: 5432,
       username: "postgres",
-      password: "1111",
-      database: process.env.DB_NAME,
+      password: "2004",
+      database: "feane",
       autoLoadModels: true, 
       synchronize: true,
-      // sync: {force: true}
+      sync: {force: true}
     }),
     JwtModule.register({
       secret: 'my secret',
