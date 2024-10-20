@@ -4,6 +4,7 @@ import { UpdateMessageDto } from './dto/update-message.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Message } from './entities/message.entity';
 import { measureMemory } from 'vm';
+import { Group } from 'src/group/entities/group.entity';
 
 @Injectable()
 export class MessageService {

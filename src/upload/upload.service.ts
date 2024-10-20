@@ -16,19 +16,20 @@ export class UploadService {
             const extName = path.extname(payload.file.originalname)
             const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
             const fileName = payload.file.fieldname + '-' + uniqueSuffix + extName
-            const fullFilePath = path.join(__dirname, '../../../', payload.destination, fileName)
-
+            const fullFilePath = path.join(__dirname, '../../', payload.destination, fileName)
+      
             const isFileFolderExists = existsSync(
-                path.join(__dirname, '../../../', payload.destination)
+                path.join(__dirname, '../../', payload.destination)
             )
 
-            const allowedExtensions = ['.jpg', '.jpeg', '.png']; // Kerakli formatlar ro'yxati
+
+            const allowedExtensions = ['.jpg', '.jpeg', '.png'];
             if (!allowedExtensions.includes(extName.toLowerCase())) {
                 throw new Error('Fayl formati noto\'g\'ri');
             }
 
             if (!isFileFolderExists) {
-                await fs.mkdir(path.join(__dirname, '../../../', payload.destination));
+                await fs.mkdir(path.join(__dirname, '../../', payload.destination));
             }
 
             await fs.writeFile(fullFilePath, payload.file.buffer)
@@ -43,11 +44,10 @@ export class UploadService {
         }
     }
     async removeFile(payload: RemoveFileRequest): Promise<RemoveFileResponse> {
-        const filePath = path.join(__dirname, '../../../', payload.fileName);
+        const filePath = path.join(__dirname, '../../', payload.fileName);
 
         const isFileExists = existsSync(filePath);
 
-        // CREATE UPLOAD FOLDER IF DESTINATION IS NOT FOUND
         if (isFileExists) {
             await fs.unlink(filePath);
         }

@@ -13,14 +13,17 @@ export class GroupService {
   }
 
   async create(payload: CreateGroupDto): Promise<void> {
-    const image = await this.#_uploadService.uploadFile({
-      file: payload.image,
-      destination: 'uploads/user',
-    })
+  //   console.log(payload)
+  //   const image = await this.#_uploadService.uploadFile({
+  //     file: payload.image,
+  //     destination: 'uploads/user',
+  //   });
+  //  payload.image = image.file;
+   
 
     await this.groupModel.create({
       name: payload.name,
-      image: payload.image,
+      image: "image.jpg",
       description: payload.description,
       link: payload.link
     })

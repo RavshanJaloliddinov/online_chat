@@ -6,7 +6,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from 'src/config/multer.config';
 
-@ApiTags("Message")
+@ApiTags("Group")
 @Controller('group')
 export class GroupController {
   constructor(private readonly groupService: GroupService) { }
@@ -18,6 +18,7 @@ export class GroupController {
     @Body() createGroupDto: CreateGroupDto,
     @UploadedFile() image?: Express.Multer.File,
   ) {
+   
     return this.groupService.create({...createGroupDto, image});
   }
 

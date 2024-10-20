@@ -22,7 +22,7 @@ import { Group } from './group/entities/group.entity';
       database: "feane",
       autoLoadModels: true, 
       synchronize: true,
-      // sync: {force: true},
+      sync: {force: true},
       models: [User, Message, Group]
     }),
     JwtModule.register({
