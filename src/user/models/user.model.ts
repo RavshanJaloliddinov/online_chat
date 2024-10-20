@@ -18,6 +18,8 @@ export class User extends Model<User> {
     @Column({ type: DataType.STRING, allowNull: false })
     password: string
 
+    @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
+    status: boolean
 
 
     @HasOne(()=>Message)
@@ -26,6 +28,7 @@ export class User extends Model<User> {
     @HasMany(()=>GroupOfUser)
     group: GroupOfUser[]
     
+
 
 
 } 
