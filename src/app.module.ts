@@ -11,6 +11,8 @@ import { MessageModule } from './message/message.module';
 import { Message } from './message/entities/message.entity';
 import { User } from './user/models';
 import { Group } from './group/entities/group.entity';
+import { CheckAuthGuard } from './guards/check-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -18,11 +20,11 @@ import { Group } from './group/entities/group.entity';
       host: "localhost",
       port: 5432,
       username: "postgres",
-      password: "1111",
-      database: "chat",
+      password: "2004",
+      database: "feane",
       autoLoadModels: true, 
       synchronize: true,
-      sync: {force: true},
+      // sync: {force: true},
       models: [User, Message, Group]
     }),
     JwtModule.register({
@@ -41,6 +43,11 @@ import { Group } from './group/entities/group.entity';
     MessageModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    // {
+    //   useClass: CheckAuthGuard,
+    //   provide: APP_GUARD
+    // }
+  ],
 })
 export class AppModule {}

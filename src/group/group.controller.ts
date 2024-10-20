@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ParseIntPipe, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ParseIntPipe, UploadedFile, UseGuards } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from 'src/config/multer.config';
+import { CheckAuthGuard } from 'src/guards/check-auth.guard';
 
 @ApiTags("Group")
 @Controller('group')
@@ -28,6 +29,7 @@ export class GroupController {
     return this.groupService.findAll();
   }
 
+  // @UseGuards(CheckAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.groupService.findOne(+id);
@@ -45,7 +47,7 @@ export class GroupController {
       ...updateGroupDto,
     };
 
-    // Agar fayl yuklangan bo'lsa
+
     if (image) {
       updatedData.image = {
         originalname: image.originalname,

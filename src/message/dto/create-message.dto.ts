@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 import { Binary } from "typeorm"
+import { MessageType } from "../entities/message.entity"
 
 export class CreateMessageDto {
 
@@ -39,4 +40,12 @@ export class CreateMessageDto {
     @IsString()
     @IsOptional()
     image?: string
+
+    @ApiProperty({
+        type: String,
+        example: 'message',
+        required: true,
+    })
+    @IsString()
+    message_type: MessageType 
 }

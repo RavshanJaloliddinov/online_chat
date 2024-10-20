@@ -40,4 +40,5 @@ export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
     @IsNotEmpty()
     @IsString()
     link: string
+
 }

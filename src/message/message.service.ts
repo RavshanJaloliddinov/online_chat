@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Message } from './entities/message.entity';
 import { measureMemory } from 'vm';
 import { Group } from 'src/group/entities/group.entity';
+import { User } from 'src/user/models';
 
 @Injectable()
 export class MessageService {
@@ -16,12 +17,13 @@ export class MessageService {
       text: payload.text,
       chat_id: payload.chat_id,
       user_id: payload.user_id,
-      image: payload?.image
+      image: payload?.image,
+      message_type: payload.message_type
     })
   }
 
   findAll() {
-    return this.messageModel.findAll()
+    return this.messageModel.findAll({include: User})
   }
 
   findOne(id: number) {
