@@ -22,7 +22,7 @@ export class CreateMessageDto {
     user_id: number
 
     @ApiProperty({
-        type: Text,
+        type: String,
         required: true,
         example: "you wusssup"
     })

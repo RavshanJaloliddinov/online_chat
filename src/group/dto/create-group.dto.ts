@@ -22,7 +22,7 @@ export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
 
 
     @ApiProperty({
-        type: Text,
+        type: String,
         example: "n13 guruh o'quvchilari uchun",
         required: false
     })

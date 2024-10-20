@@ -13,8 +13,12 @@ export class GroupController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  create(@Body() createGroupDto: CreateGroupDto) {
-    return this.groupService.create(createGroupDto);
+  @UseInterceptors(FileInterceptor('image', multerConfig))
+  async create(
+    @Body() createGroupDto: CreateGroupDto,
+    @UploadedFile() image?: Express.Multer.File,
+  ) {
+    return this.groupService.create({...createGroupDto, image});
   }
 
   @Get()
@@ -33,7 +37,7 @@ export class GroupController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateGroupDto: UpdateGroupDto,
-    @UploadedFile() image?: Express.Multer.File, 
+    @UploadedFile() image?: Express.Multer.File,
   ) {
     return this.groupService.update(id, updateGroupDto);
   }
