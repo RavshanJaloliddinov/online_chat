@@ -15,12 +15,13 @@ import { GroupOfUserModule } from './group_of_user/group_of_user.module';
 import { GroupOfUser } from './group_of_user/entities/group_of_user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { dbConfig } from './config/db.config';
+import { appConfig } from './config/app.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [dbConfig], // dbConfig ni yuklang
-      isGlobal: true, // Globallikni o'rnatish
+      load: [dbConfig, appConfig],
+      isGlobal: true, 
 
     }),
     SequelizeModule.forRootAsync({
