@@ -18,7 +18,7 @@ export class MessageService {
 
   async create(payload: CreateMessageDto) {
     const {chat_id,user_id} = payload
-    const foundedChat = await firstValueFrom(this.httpService.get(`http://127.0.0.1:4000/group/${chat_id}`))
+    const foundedChat = await firstValueFrom(this.httpService.get(`http://${process.env.APP_HOST}:${process.env.APP_PORT}/group/${chat_id}`))
     const chatUsers = foundedChat.data.users
     
 
