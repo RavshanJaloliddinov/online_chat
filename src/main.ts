@@ -2,27 +2,45 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { ConfigService } from '@nestjs/config';
+
+import * as cookieParser from 'cookie-parser';
+
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
 
   app.enableCors({
     origin: "*",
     methods: "*"
-  })
+  });
+
+
   const config = new DocumentBuilder()
     .setTitle("microservice")
-    .setDescription('api')
+    .setDescription('API for microservice')
     .setVersion('1.0')
-    .addTag('mircoservice')
-    .build()
-  const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup("api", app, document)
+    .addTag('microservice')
+    .build();
 
 
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup("api", app, document);
 
-  await app.listen(4000), () => {
-    console.log(`Listening on ${4000}`)
-  };
+  const port = configService.get<number>('appConfig.port'); 
+  const host = configService.get<string>('appConfig.host'); 
+
+  await app.listen(port, () => {
+    console.log(`Listening on http://${host}:${port}`);
+  });
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> ce6644307ca2deba2e27cb7622aa5dde7f43b394
+
 }
 
 bootstrap();
