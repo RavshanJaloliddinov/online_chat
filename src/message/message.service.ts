@@ -12,9 +12,9 @@ export class MessageService {
 
   create(payload: CreateMessageDto) {
     return this.messageModel.create({
-      text: payload?.text,
-      chat_id: payload?.chat_id,
-      user_id: payload?.user_id,
+      text: payload.text,
+      chat_id: payload.chat_id,
+      user_id: payload.user_id,
       image: payload?.image
     })
   }
