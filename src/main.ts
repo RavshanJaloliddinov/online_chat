@@ -36,10 +36,7 @@ async function bootstrap() {
     console.log(`Listening on http://${host}:${port}`);
   });
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ce6644307ca2deba2e27cb7622aa5dde7f43b394
 
 }
 
