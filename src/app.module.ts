@@ -9,6 +9,8 @@ import { MessageModule } from './message/message.module';
 import { Message } from './message/entities/message.entity';
 import { User } from './user/models';
 import { Group } from './group/entities/group.entity';
+import { CheckAuthGuard } from './guards/check-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 import { GroupOfUserModule } from './group_of_user/group_of_user.module';
 import { GroupOfUser } from './group_of_user/entities/group_of_user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -19,6 +21,7 @@ import { dbConfig } from './config/db.config';
     ConfigModule.forRoot({
       load: [dbConfig], // dbConfig ni yuklang
       isGlobal: true, // Globallikni o'rnatish
+
     }),
     SequelizeModule.forRootAsync({
       imports: [ConfigModule],
@@ -44,6 +47,11 @@ import { dbConfig } from './config/db.config';
     GroupOfUserModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    // {
+    //   useClass: CheckAuthGuard,
+    //   provide: APP_GUARD
+    // }
+  ],
 })
 export class AppModule { }

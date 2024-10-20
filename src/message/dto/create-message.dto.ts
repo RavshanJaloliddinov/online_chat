@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 import { Binary } from "typeorm"
+import { MessageType } from "../entities/message.entity"
 
 export class CreateMessageDto {
 
@@ -42,9 +43,10 @@ export class CreateMessageDto {
 
     @ApiProperty({
         type: String,
-        required: false,
+
+        example: 'message',
+        required: true,
     })
-    @IsEnum(['message', 'notification'])
-    @IsOptional()
-    message_type?: string
+    @IsString()
+    message_type: MessageType 
 }

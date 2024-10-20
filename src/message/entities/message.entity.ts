@@ -2,9 +2,13 @@
 import { Column, DataType, Table, Model, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { Group } from "src/group/entities/group.entity";
 import { User } from "src/user/models";
-import { Decimal128 } from "typeorm";
 
-@Table({ tableName: 'message', timestamps: true })
+export enum MessageType {
+    message = "message",
+    joined = "joined" 
+}
+@Table({tableName: 'message', timestamps: true})
+
 export class Message extends Model<Message>{
 
     @Column({
@@ -41,11 +45,10 @@ export class Message extends Model<Message>{
     @Column({ type: DataType.STRING, allowNull: true, defaultValue: 'image.png' })
     image?: string
 
-    @Column({
-        type: DataType.BOOLEAN,
-        values: ['message', 'notification'],
-        defaultValue: 'message'
-    })
-    message_type: string
+
+    @Column({type: DataType.ENUM(MessageType.joined,MessageType.message), defaultValue: MessageType.message})
+    message_type: MessageType
+
+   
 
 }

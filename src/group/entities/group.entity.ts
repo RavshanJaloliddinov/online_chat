@@ -1,8 +1,12 @@
 import { Column, DataType, Table, Model, HasMany } from "sequelize-typescript";
+import { GroupOfUser } from "src/group_of_user/entities/group_of_user.entity";
 import { Message } from "src/message/entities/message.entity";
+
 
 @Table({ tableName: 'group', timestamps: true })
 export class Group extends Model<Group>{
+
+
 
     @Column({
         type: DataType.INTEGER,
@@ -23,6 +27,11 @@ export class Group extends Model<Group>{
     @Column({ type: DataType.STRING, unique: true })
     link: string
 
+
+
     @HasMany(() => Message)
     messages: Message[]
+
+    @HasMany(()=>GroupOfUser)
+    users: GroupOfUser[]
 }
