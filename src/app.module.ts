@@ -5,6 +5,12 @@ import { ClientModule } from './client/client.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ChatModule } from './chat/chat.module';
+import { GroupModule } from './group/group.module';
+import { UploadModule } from './upload/upload.module';
+import { MessageModule } from './message/message.module';
+import { Message } from './message/entities/message.entity';
+import { User } from './user/models';
+import { Group } from './group/entities/group.entity';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -16,7 +22,8 @@ import { ChatModule } from './chat/chat.module';
       database: "feane",
       autoLoadModels: true, 
       synchronize: true,
-      sync: {force: true}
+      // sync: {force: true},
+      models: [User, Message, Group]
     }),
     JwtModule.register({
       secret: 'my secret',
@@ -29,6 +36,9 @@ import { ChatModule } from './chat/chat.module';
     ClientModule,
     AuthModule,
     ChatModule,
+    GroupModule,
+    UploadModule,
+    MessageModule,
   ],
   controllers: [],
   providers: [],
