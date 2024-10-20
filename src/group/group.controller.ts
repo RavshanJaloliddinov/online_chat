@@ -9,7 +9,7 @@ import { multerConfig } from 'src/config/multer.config';
 @ApiTags("Group")
 @Controller('group')
 export class GroupController {
-  constructor(private readonly groupService: GroupService) { }
+  constructor(private readonly groupService: GroupService) {}
 
   @Post()
   @ApiConsumes('multipart/form-data')
@@ -18,9 +18,10 @@ export class GroupController {
     @Body() createGroupDto: CreateGroupDto,
     @UploadedFile() image?: Express.Multer.File,
   ) {
+
    
     return this.groupService.create({...createGroupDto, image});
-  }
+}
 
   @Get()
   findAll() {
@@ -40,7 +41,20 @@ export class GroupController {
     @Body() updateGroupDto: UpdateGroupDto,
     @UploadedFile() image?: Express.Multer.File,
   ) {
-    return this.groupService.update(id, updateGroupDto);
+    const updatedData = {
+      ...updateGroupDto,
+    };
+
+    // Agar fayl yuklangan bo'lsa
+    if (image) {
+      updatedData.image = {
+        originalname: image.originalname,
+        filename: image.filename,
+        path: image.path,
+      };
+    }
+
+    return this.groupService.update(id, updatedData);
   }
 
   @Delete(':id')

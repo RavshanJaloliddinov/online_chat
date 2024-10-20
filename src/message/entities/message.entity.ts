@@ -13,16 +13,23 @@ export class Message extends Model<Message>{
     })
     id: number;
 
+
     @ForeignKey(()=> Group)
     @Column({ type: DataType.INTEGER, allowNull: false, onDelete: "CASCADE", onUpdate: "NO ACTION" })
-    @Column({type: DataType.STRING, allowNull: false})
+
+    
+    @Column({type: DataType.NUMBER, allowNull: false})
+
     chat_id: number
     @BelongsTo(()=>Group)
     group: Group
 
+
     @ForeignKey(()=> User)
     @Column({ type: DataType.INTEGER, allowNull: false, onDelete: "CASCADE", onUpdate: "NO ACTION" })
-    @Column({type: DataType.STRING, allowNull: false})
+
+    @Column({type: DataType.NUMBER, allowNull: false})
+
     user_id: number
     @BelongsTo(()=>User)
     user: User
@@ -30,7 +37,7 @@ export class Message extends Model<Message>{
     @Column({type: DataType.STRING, allowNull: false})
     text: string
 
-    @Column({type: DataType.STRING, allowNull: true})
+    @Column({type: DataType.STRING, allowNull: true, defaultValue: 'image.png'})
     image?: string
 
    

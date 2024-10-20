@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { Binary } from "typeorm"
 
 export class CreateMessageDto {
 
@@ -32,8 +33,8 @@ export class CreateMessageDto {
 
     @ApiProperty({
         type: String,
-        required: false
-        ,
+        required: false,
+        format: 'binary',
     })
     @IsString()
     @IsOptional()
