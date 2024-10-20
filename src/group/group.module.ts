@@ -12,6 +12,6 @@ import { AuthModule } from 'src/auth/auth.module'; // Import AuthModule here
     AuthModule,
   ],
   controllers: [GroupController],
-  providers: [GroupService, UploadService],
+  providers: [GroupService],
 })
 export class GroupModule {}

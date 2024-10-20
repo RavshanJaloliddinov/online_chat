@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './models';
 import { CreateUserRequest, UpdateUserRequest } from './interfaces';
+import { GroupOfUser } from 'src/group_of_user/entities/group_of_user.entity';
+import { Group } from 'src/group/entities/group.entity';
 
 @Injectable()
 export class UserService {
@@ -23,7 +25,7 @@ export class UserService {
   }
 
   async findOne(id: number): Promise<User> {
-    return await this.userModel.findOne({ where: { id } })
+    return await this.userModel.findOne({ where: { id }, include: [{model: GroupOfUser, include: [Group]}] })
   }
 
   async update(id: number, payload: UpdateUserRequest): Promise<void> {

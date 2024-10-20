@@ -14,6 +14,7 @@ import { Group } from './group/entities/group.entity';
 import { CheckAuthGuard } from './guards/check-auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { GroupOfUserModule } from './group_of_user/group_of_user.module';
+import { GroupOfUser } from './group_of_user/entities/group_of_user.entity';
 
 
 @Module({
@@ -27,7 +28,7 @@ import { GroupOfUserModule } from './group_of_user/group_of_user.module';
       autoLoadModels: true, 
       synchronize: true,
       // sync: {force: true},
-      models: [User, Message, Group]
+      models: [User, Message, Group, GroupOfUser]
     }),
     JwtModule.register({
       secret: 'my secret',

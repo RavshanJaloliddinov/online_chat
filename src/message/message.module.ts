@@ -3,10 +3,15 @@ import { MessageService } from './message.service';
 import { MessageController } from './message.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Message } from './entities/message.entity';
+import { GroupService } from 'src/group/group.service';
+import { UploadService } from 'src/upload/upload.service';
+import { Group } from 'src/group/entities/group.entity';
+import { GroupModule } from 'src/group/group.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Message])],
+  imports: [SequelizeModule.forFeature([Message,Group]),HttpModule],
   controllers: [MessageController],
-  providers: [MessageService],
+  providers: [MessageService,GroupService],
 })
 export class MessageModule {}

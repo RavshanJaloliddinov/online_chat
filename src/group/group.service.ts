@@ -6,12 +6,12 @@ import { Group } from './entities/group.entity';
 import { UploadService } from 'src/upload/upload.service';
 import { Message } from 'src/message/entities/message.entity';
 import { User } from 'src/user/models';
+import { GroupOfUser } from 'src/group_of_user/entities/group_of_user.entity';
+import { model } from 'mongoose';
 
 @Injectable()
 export class GroupService {
-  #_uploadService: UploadService
-  constructor(@InjectModel(Group) private groupModel: typeof Group, upload: UploadService) {
-    this.#_uploadService = upload
+  constructor(@InjectModel(Group) private groupModel: typeof Group) {
   }
 
   async create(payload: CreateGroupDto): Promise<void> {
@@ -37,16 +37,16 @@ export class GroupService {
   }
 
   async findOne(id: number): Promise<Group | null> {
-    return await this.groupModel.findOne({ where: { id }, include: [{model: Message, include: [User]}] });
+    return await this.groupModel.findOne({ where: { id }, include: [{model: Message, include: [User]},{model: GroupOfUser, include: [User]}] });
   }
 
   async update(id: number, payload: UpdateGroupDto): Promise<[number, Group[]]> {
 
-    const image = await this.#_uploadService.uploadFile({
-      file: payload.image,
-      destination: 'uploads/user',
-    })
-    payload.image = image.file
+    // const image = await this.#_uploadService.uploadFile({
+    //   file: payload.image,
+    //   destination: 'uploads/user',
+    // })
+    // payload.image = image.file
     return await this.groupModel.update(payload, { where: { id }, returning: true });
   }
 

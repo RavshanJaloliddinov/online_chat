@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, IsOptional, IsString } from "class-validator"
 
-export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
+export class CreateGroupDto {
 
     @ApiProperty({
         type: String,
@@ -14,7 +14,6 @@ export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
     @ApiProperty({
         type: String,
         example: "fullstack n13",
-        required: true
     })
     @IsNotEmpty()
     @IsString()
@@ -24,7 +23,6 @@ export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
     @ApiProperty({
         type: String,
         example: "n13 guruh o'quvchilari uchun",
-        required: false
     })
     @IsOptional()
     @IsString()
@@ -34,8 +32,6 @@ export class CreateGroupDto implements Omit<CreateGroupDto, 'image'> {
     @ApiProperty({
         type: String,
         example: 'n13_group',
-        required: true,
-        uniqueItems: true
     })
     @IsNotEmpty()
     @IsString()

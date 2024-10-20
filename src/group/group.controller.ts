@@ -13,15 +13,15 @@ export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   @Post()
-  @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('image', multerConfig))
+  // @ApiConsumes('multipart/form-data')
+  // @UseInterceptors(FileInterceptor('image', multerConfig))
   async create(
     @Body() createGroupDto: CreateGroupDto,
-    @UploadedFile() image?: Express.Multer.File,
+    // @UploadedFile() image?: Express.Multer.File,
   ) {
 
    
-    return this.groupService.create({...createGroupDto, image});
+    return this.groupService.create({...createGroupDto});
 }
 
   @Get()

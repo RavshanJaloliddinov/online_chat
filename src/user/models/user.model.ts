@@ -1,4 +1,5 @@
-import { DataType, Column, Table, Model, ForeignKey, BelongsTo, HasOne } from "sequelize-typescript";
+import { DataType, Column, Table, Model, ForeignKey, BelongsTo, HasOne, HasMany } from "sequelize-typescript";
+import { GroupOfUser } from "src/group_of_user/entities/group_of_user.entity";
 import { Message } from "src/message/entities/message.entity";
 
 @Table({tableName: 'User', timestamps: true})
@@ -17,4 +18,10 @@ export class User extends Model<User> {
 
     @HasOne(()=>Message)
     user: User
+
+    @HasMany(()=>GroupOfUser)
+    group: GroupOfUser[]
+    
+
+
 } 
