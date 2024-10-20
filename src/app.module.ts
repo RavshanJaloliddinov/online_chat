@@ -7,6 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ChatModule } from './chat/chat.module';
 import { GroupModule } from './group/group.module';
 import { UploadModule } from './upload/upload.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [SequelizeModule.forRoot({
@@ -33,6 +34,7 @@ import { UploadModule } from './upload/upload.module';
     ChatModule,
     GroupModule,
     UploadModule,
+    MessageModule,
   ],
   controllers: [],
   providers: [],

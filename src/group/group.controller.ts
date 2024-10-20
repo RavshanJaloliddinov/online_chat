@@ -1,13 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, ParseIntPipe, UploadedFile } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { multerConfig } from 'src/config/multer.config';
 
+@ApiTags("Message")
 @Controller('group')
 export class GroupController {
-  constructor(private readonly groupService: GroupService) {}
+  constructor(private readonly groupService: GroupService) { }
 
   @Post()
+  @ApiConsumes('multipart/form-data')
   create(@Body() createGroupDto: CreateGroupDto) {
     return this.groupService.create(createGroupDto);
   }
@@ -23,12 +28,18 @@ export class GroupController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGroupDto: UpdateGroupDto) {
-    return this.groupService.update(+id, updateGroupDto);
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('image', multerConfig))
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateGroupDto: UpdateGroupDto,
+    @UploadedFile() image?: Express.Multer.File, 
+  ) {
+    return this.groupService.update(id, updateGroupDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.groupService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.groupService.remove(id);
   }
 }
