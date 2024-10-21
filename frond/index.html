@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
         integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>WebSocket Chat</title>
 
@@ -32,7 +32,7 @@
             background-color: #ffffff;
         }
 
-        #no-messages-box{
+        #no-messages-box {
             border: 1px solid black;
             height: 65vh;
             overflow-y: scroll;
@@ -75,25 +75,52 @@
         #message-input button:hover {
             background-color: #0056b3;
         }
+
+        /*new style*/ 
+        .my-message {
+            background-color: #007bff;
+            /* Ko'k rang */
+            color: white;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 75%;
+            float: right;
+            /* O'ng tomonga surish */
+        }
+
+        .other-message {
+            background-color: #f8f9fa;
+            /* Oq rang */
+            color: black;
+            border-radius: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 75%;
+            float: left;
+            /* Chap tomonga surish */
+        }
     </style>
+
 </head>
 
 <body>
-    <div class="container-fluid bg-danger mx-auto p-0 m-0 d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="container-fluid bg-danger mx-auto p-0 m-0 d-flex align-items-center justify-content-center"
+        style="height: 100vh;">
         <div class="container chat-container">
-      
-            <div class="container row mx-auto p-1 m-1 d-flex align-items-center justify-content-between" id="header-chat" style="margin-bottom: 10px;">
+
+            <div class="container row mx-auto p-1 m-1 d-flex align-items-center justify-content-between"
+                id="header-chat" style="margin-bottom: 10px;">
                 <div class="col-xxl-3 col-md-12 col-sm-12 col-lg-12">
-                    <select class="form-select form-select-sm">
-                        <option selected>Select a Group</option>
-                        <option value="group1">Group 1</option>
-                        <option value="group2">Group 2</option>
-                        <option value="group3">Group 3</option>
-                    </select>
+                    <div class="col-xxl-3 col-md-12 col-sm-12 col-lg-12">
+                        <select id="groupSelect" class="form-select form-select-sm">
+                            <option selected>Select a Group</option>
+                        </select>
+                    </div>
                 </div>
 
-                
-                <div class="col-xxl-5 col-xl-3 col-md-12 col-sm-12 col-lg-12 d-flex gap-2" style="margin: 10px 0px; display: flex; align-items: center; justify-content: center;" >
+                <div class="col-xxl-5 col-xl-3 col-md-12 col-sm-12 col-lg-12 d-flex gap-2"
+                    style="margin: 10px 0px; display: flex; align-items: center; justify-content: center;">
                     <button class="btn btn-sm btn-outline-secondary">
                         <i class="bi bi-gear-fill"></i> Settings
                     </button>
@@ -108,15 +135,20 @@
                     </button>
                 </div>
 
-                <div class="col-xxl-3 p-0 m-0 d-flex align-items-center justify-content-center col-md-12 col-sm-12 col-lg-12">
+                <div
+                    class="col-xxl-3 p-0 m-0 d-flex align-items-center justify-content-center col-md-12 col-sm-12 col-lg-12">
                     <p id="typing-status">john, carlo, sara... is typing</p>
                 </div>
             </div>
 
-     
             <div id="chat-box">
-              
+                <!-- Static messages removed as per request -->
+                <div class="my-message">Salom! Bu sizning xabaringiz.</div>
+                <div class="other-message">Salom! Sizni ko'rish yaxshi.</div>
+                <div class="my-message">Qanday yordam bera olishim mumkin?</div>
+                <div class="other-message">Menga ma'lumot kerak.</div>
             </div>
+
 
             <div id="no-messages-box">
                 <h3>Currently not connected to any groups</h3>
@@ -131,24 +163,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+        </script>
 
     <script>
 
         const messageInput = document.getElementById("message-input")
         const chatBox = document.getElementById("chat-box")
         const noMessageBox = document.getElementById("no-messages-box")
-        if(!localStorage.getItem("groupId")){
+        if (!localStorage.getItem("groupId")) {
             messageInput.style.display = "none"
-            chatBox.style.display = "none"
-            noMessageBox.style.display = "flex"
+            chatBox.style.display = "flex"
+            noMessageBox.style.display = "none"
         }
-        if(localStorage.getItem("groupId")){
+        if (!localStorage.getItem("groupId")) {
             messageInput.style.display = "flex"
             chatBox.style.display = "flex"
             noMessageBox.style.display = "none"
         }
-      
+
         document.querySelector('.btn-outline-warning').addEventListener('click', function () {
             Swal.fire({
                 title: 'Create New Group',
@@ -162,10 +194,10 @@
                         Swal.showValidationMessage('Group name is required');
                         return;
                     }
-                    if(!localStorage.getItem('userId')){
+                    if (!localStorage.getItem('userId')) {
                         Swal.showValidationMessage('You do not have permission to perform this action')
                     }
-                    return fetch('http://127.0.0.1:8080/group', {
+                    return fetch('http://127.0.0.1:4000/group', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -177,8 +209,9 @@
                             description: `${groupName} uchun guruh`,
                             link: `${groupName.replace(/\s+/g, '_').toLowerCase()}_group`,
                             group_admin: localStorage.getItem("userId")
-                            
+
                         })
+
                     }).then(response => {
                         if (response.status === 201) {
                             return { groupName };
@@ -189,6 +222,7 @@
                         Swal.showValidationMessage(`Request failed: ${error}`);
                         console.log(error);
                     });
+
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -196,11 +230,95 @@
                 }
             });
         });
-    </script>
-    
-    
-    
 
+
+
+        const userId = localStorage.getItem('userId');
+
+        // Foydalanuvchi ma'lumotlarini olish funksiyasi
+        async function getUserInfo(userId) {
+            try {
+                const response = await fetch(`http://127.0.0.1:4000/user/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': '*/*',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('No useful information received');
+                }
+
+                const userInfo = await response.json();
+                return userInfo;
+            } catch (error) {
+                console.error('Xatolik yuz berdi:', error);
+            }
+        }
+
+        // Dinamik ravishda option yaratish
+        function populateGroupOptions(groups) {
+            const groupSelect = document.getElementById('groupSelect');
+
+            groupSelect.innerHTML = '<option selected>Select a Group</option>';
+
+            groups.forEach(groupItem => {
+                const option = document.createElement('option');
+                option.value = groupItem.group.id;
+                option.textContent = groupItem.group.name;
+                groupSelect.appendChild(option);
+            });
+        }
+
+        // Ma'lumotlarni olish va select elementini to'ldirish
+        getUserInfo(userId).then(userInfo => {
+            if (userInfo && userInfo.group) {
+                populateGroupOptions(userInfo.group);
+            } else {
+                console.error('Guruh maʼlumotlari topilmadi');
+            }
+        });
+
+    </script>
+
+
+    <!-- SOCKET.IO -->
+    <script>
+
+        const socket = io('http://localhost:4000');
+
+
+        // Foydalanuvchi malumotlarini olish
+        async function getUserInfo(userId) {
+            try {
+                const response = await fetch(`http://127.0.0.1:4000/user/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accept': '*/*',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('No useful information received');
+                }
+
+                const userInfo = await response.json();
+                return userInfo;
+            } catch (error) {
+                console.error('An error occurred: ', error);
+            }
+        }
+
+        // Typing...
+        function handleTyping() {
+            getUserInfo(userId).then((userInfo) => {
+                socket.emit('typing', userInfo.full_name || userId);
+            });
+        }
+
+    </script>
 </body>
 
 </html>

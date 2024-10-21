@@ -21,7 +21,6 @@ export class ChatController implements OnGatewayConnection, OnGatewayDisconnect 
 
   handleConnection(client: Socket) {
     console.log(`Foydalanuvchi ulanmoqda: ${client.id}`
-
     )
   }
 

@@ -109,7 +109,7 @@
       const password = document.getElementById('loginPassword').value;
 
       try {
-        const response = await axios.post('http://127.0.0.1:8080/auth/login', { email, password });
+        const response = await axios.post('http://127.0.0.1:4000/auth/login', { email, password });
         alert('Login muvaffaqiyatli');
         localStorage.setItem('token',response.data.token)
         localStorage.setItem('email',response.data.email)
@@ -129,7 +129,7 @@
       const password = document.getElementById('registerPassword').value;
 
       try {
-        const response = await axios.post('http://127.0.0.1:3000/auth/register', { full_name, email, password });
+        const response = await axios.post('http://127.0.0.1:4000/auth/register', { full_name, email, password });
         alert('Ro\'yxatdan o\'tish muvaffaqiyatli!');
         window.location.reload()
       } catch (error) {
