@@ -31,6 +31,7 @@ export class GroupService {
       image: "image.jpg",
       description: payload.description,
       link: payload.link,
+      group_admin: payload.group_admin
     })
    
   }

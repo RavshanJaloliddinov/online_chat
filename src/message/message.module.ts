@@ -8,9 +8,10 @@ import { UploadService } from 'src/upload/upload.service';
 import { Group } from 'src/group/entities/group.entity';
 import { GroupModule } from 'src/group/group.module';
 import { HttpModule } from '@nestjs/axios';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Message,Group]),HttpModule],
+  imports: [SequelizeModule.forFeature([Message,Group]),HttpModule,ConfigModule],
   controllers: [MessageController],
   providers: [MessageService,GroupService],
 })

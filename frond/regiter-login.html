@@ -109,8 +109,12 @@
       const password = document.getElementById('loginPassword').value;
 
       try {
-        const response = await axios.post('http://127.0.0.1:3000/auth/login', { email, password });
-        window.location
+        const response = await axios.post('http://127.0.0.1:8080/auth/login', { email, password });
+        alert('Login muvaffaqiyatli');
+        localStorage.setItem('token',response.data.token)
+        localStorage.setItem('email',response.data.email)
+        localStorage.setItem('userId',response.data.id)
+        window.location.href = "./index.html"
       } catch (error) {
         console.error(error);
         alert('Login muvaffaqiyatsiz!');

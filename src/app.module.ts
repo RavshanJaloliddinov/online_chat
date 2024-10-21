@@ -16,12 +16,15 @@ import { GroupOfUser } from './group_of_user/entities/group_of_user.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { dbConfig } from './config/db.config';
 import { appConfig } from './config/app.config';
+import { BASE_URL } from './config/base_url';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+
       load: [dbConfig, appConfig],
       isGlobal: true,
+
 
     }),
     SequelizeModule.forRootAsync({
@@ -35,8 +38,9 @@ import { appConfig } from './config/app.config';
         database: config.get<string>('database.dbName'),
         models: [User, Group, Message, GroupOfUser],
         synchronize: true,
+        // sync: {force: true},
         logging: console.log,
-        // sync: { force: true },
+        sync: { force: true },
         autoLoadModels: true,
       }),
       inject: [ConfigService],

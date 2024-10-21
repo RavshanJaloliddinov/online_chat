@@ -37,4 +37,11 @@ export class CreateGroupDto {
     @IsString()
     link: string
 
+    @ApiProperty({
+        type: Number,
+        example: "ad,mi id"
+    })
+    @IsNotEmpty()
+    group_admin: number
+
 }
