@@ -13,7 +13,7 @@ export class GroupOfUserService {
     return this.groupOfUserModel.create({
       user_id: payload.user_id,
       group_id: payload.group_id,
-      is_admin: payload.is_admin
+      is_admin: false
     })
   }
 
@@ -28,9 +28,9 @@ export class GroupOfUserService {
   update(id: number, payload: UpdateGroupOfUserDto) {
     return this.groupOfUserModel.update(
       {
-        user_id: payload.user_id,
-        group_id: payload.group_id,
-        is_admin: payload.is_admin
+        user_id: payload?.user_id,
+        group_id: payload?.group_id,
+        is_admin: false
       }, { where: { id } }
     )
   }

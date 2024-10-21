@@ -46,7 +46,7 @@ console.log(process.cwd())
         synchronize: true,
         // sync: {force: true},
         logging: console.log,
-        sync: { force: true },
+        // sync: { force: true },
         autoLoadModels: true,
       }),
       inject: [ConfigService],

@@ -6,11 +6,14 @@ import { Group } from './entities/group.entity';
 import { Message } from 'src/message/entities/message.entity';
 import { User } from 'src/user/models';
 import { GroupOfUser } from 'src/group_of_user/entities/group_of_user.entity';
+import { GroupOfUserService } from 'src/group_of_user/group_of_user.service';
 
 
 @Injectable()
 export class GroupService {
+  
   constructor(@InjectModel(Group) private groupModel: typeof Group) {
+    
   }
 
   async create(payload: CreateGroupDto): Promise<void> {
@@ -22,7 +25,7 @@ export class GroupService {
   //   });
   //  payload.image = image.file;
    
-
+    
     await this.groupModel.create({
       name: payload.name,
       image: "image.jpg",
@@ -30,6 +33,7 @@ export class GroupService {
       link: payload.link,
       group_admin: payload.group_admin
     })
+   
   }
 
   async findAll(): Promise<Group[]> {
