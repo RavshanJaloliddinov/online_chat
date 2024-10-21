@@ -17,9 +17,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { dbConfig } from './config/db.config';
 import { appConfig } from './config/app.config';
 import { BASE_URL } from './config/base_url';
-
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+console.log(process.cwd())
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: "../frond",
+      serveRoot: '/static',
+    }),
     ConfigModule.forRoot({
 
       load: [dbConfig, appConfig],
