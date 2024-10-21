@@ -40,7 +40,7 @@ import { BASE_URL } from './config/base_url';
         synchronize: true,
         // sync: {force: true},
         logging: console.log,
-        // sync: { force: true },
+        sync: { force: true },
         autoLoadModels: true,
       }),
       inject: [ConfigService],

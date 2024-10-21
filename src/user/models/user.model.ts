@@ -1,5 +1,6 @@
 
 import { DataType, Column, Table, Model, ForeignKey, BelongsTo, HasOne, HasMany } from "sequelize-typescript";
+import { Group } from "src/group/entities/group.entity";
 import { GroupOfUser } from "src/group_of_user/entities/group_of_user.entity";
 import { Message } from "src/message/entities/message.entity";
 
@@ -27,6 +28,8 @@ export class User extends Model<User> {
 
     @HasMany(()=>GroupOfUser)
     group: GroupOfUser[]
+
+    
     
 
 
