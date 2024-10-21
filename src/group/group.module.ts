@@ -3,7 +3,6 @@ import { GroupService } from './group.service';
 import { GroupController } from './group.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Group } from './entities/group.entity';
-import { UploadService } from 'src/upload/upload.service';
 import { AuthModule } from 'src/auth/auth.module'; // Import AuthModule here
 
 @Module({
